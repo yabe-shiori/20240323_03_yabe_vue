@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="container">
+        <input
+          type="text"
+          v-model="searchName"
+          :style="{ borderColor: inputBorderColor, outline: 'none' }"
+          @input="updateBorderColor"
+        />
+        <ul>
+          <li v-for="name in filteredNames" :key="name">{{ name }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          searchName: "",
+          inputBorderColor: "#7DC265",
+          names: ["佐藤", "山田", "鈴木", "田中"],
+        },
+        computed: {
+          filteredNames: function () {
+            return this.names.filter((name) =>
+              name.toLowerCase().includes(this.searchName.toLowerCase())
+            );
+          },
+        },
+        methods: {
+          updateBorderColor() {
+            this.inputBorderColor = "#7DC265";
+          },
+        },
+      });
+    </script>
+
+    <style>
+      .container {
+        padding-top: 50px;
+        width: 300px;
+        margin: 0 auto;
+      }
+      li {
+        padding-top: 0;
+        list-style: none;
+        font-size: 22px;
+      }
+      input {
+        border: 2px solid;
+        border-radius: 5px;
+        padding: 5px;
+      }
+      ul {
+        padding: 0;
+      }
+    </style>
+  </body>
+</html>
